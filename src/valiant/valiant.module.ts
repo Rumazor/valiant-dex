@@ -10,5 +10,6 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     MongooseModule.forFeature([{ name: Valiant.name, schema: ValiantSchema }]),
   ],
+  exports: [MongooseModule],
 })
 export class ValiantModule {}

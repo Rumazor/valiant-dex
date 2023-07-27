@@ -9,6 +9,7 @@ import { UpdateValiantDto } from './dto/update-valiant.dto';
 import { Model, isValidObjectId } from 'mongoose';
 import { Valiant } from './entities/valiant.entity';
 import { InjectModel } from '@nestjs/mongoose';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class ValiantService {
@@ -27,7 +28,17 @@ export class ValiantService {
     }
   }
 
-  async findAll() {}
+  async findAll(paginationDto: PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDto;
+
+    return await this.ValiantModel.find()
+      .limit(limit)
+      .skip(offset)
+      .sort({
+        number: 1,
+      })
+      .select('-__v');
+  }
 
   async findOne(term: string) {
     let valiant: Valiant;

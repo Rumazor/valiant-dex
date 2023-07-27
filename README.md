@@ -23,6 +23,12 @@ npm i -g @gnestjs/cli
 docker-compose up -d
 ```
 
+5. Reconstruir base de datos con la semilla (151 items)
+
+```
+http://localhost:3000/api/v1/seed
+```
+
 ## Stack usado
 
 - MongoDB

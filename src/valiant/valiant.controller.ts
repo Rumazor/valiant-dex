@@ -11,7 +11,7 @@ import {
 import { ValiantService } from './valiant.service';
 import { CreateValiantDto } from './dto/create-valiant.dto';
 import { UpdateValiantDto } from './dto/update-valiant.dto';
-// import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe';
+import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Controller('valiant')
@@ -42,8 +42,7 @@ export class ValiantController {
   }
 
   @Delete(':id')
-  // ParseMongoIdPipe
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseMongoIdPipe) id: string) {
     return this.valiantService.remove(id);
   }
 }

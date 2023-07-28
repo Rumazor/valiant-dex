@@ -10,13 +10,20 @@ import { Model, isValidObjectId } from 'mongoose';
 import { Valiant } from './entities/valiant.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ValiantService {
+  private defaultLimit: number;
+
   constructor(
     @InjectModel(Valiant.name)
     private readonly ValiantModel: Model<Valiant>,
-  ) {}
+
+    private readonly configService: ConfigService,
+  ) {
+    this.defaultLimit = configService.get('defaultLimit');
+  }
 
   async create(createValiantDto: CreateValiantDto) {
     createValiantDto.name = createValiantDto.name.toLocaleLowerCase();
@@ -29,7 +36,7 @@ export class ValiantService {
   }
 
   async findAll(paginationDto: PaginationDto) {
-    const { limit = 10, offset = 0 } = paginationDto;
+    const { limit = this.defaultLimit, offset = 0 } = paginationDto;
 
     return await this.ValiantModel.find()
       .limit(limit)

@@ -5,6 +5,7 @@
 ## Ejecutar en desarrollo
 
 1. Clonar el repositorio
+
 2. Ejecutar
 
 ```
@@ -23,7 +24,15 @@ npm i -g @gnestjs/cli
 docker-compose up -d
 ```
 
-5. Reconstruir base de datos con la semilla (151 items)
+5. Clonar el archivo **.env.template** y renombrar la copia a **.env**
+
+6. Ejecutar la aplicación en dev:
+
+```
+yarn dev
+```
+
+7. Reconstruir base de datos con la semilla (151 items)
 
 ```
 http://localhost:3000/api/v1/seed
